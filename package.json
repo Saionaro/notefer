@@ -1,11 +1,9 @@
 {
   "name": "nano-notif",
+  "description": "The lightweight beautiful notifications system",
   "version": "1.0.0",
-  "module": "./dist/index.js",
-  "author": "Artem Shibakow",
-  "license": "MIT",
   "scripts": {
-    "serve": "parcel lib/index.html",
+    "serve": "parcel site/index.html",
     "dev": "tsc -w",
     "build": "npm run build:js && npm run build:css",
     "build:js": "tsc",
@@ -15,6 +13,18 @@
     "lint:types": "tsc --noEmit",
     "prepublishOnly": "yarn run build"
   },
+  "main": "./lib/NanoNotif.js",
+  "author": "Saionaro <shibakow@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "notifications",
+    "nano"
+  ],
+  "repository": "git@github.com:Saionaro/nano-notif.git",
+  "bugs": {
+    "url": "https://github.com/Saionaro/nano-notif/issues"
+  },
+  "homepage": "https://github.com/Saionaro/nano-notif",
   "browserslist": [
     "defaults"
   ],

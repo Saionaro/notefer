@@ -1,3 +1,3 @@
 # nano-notif
 
-Simple beautiful notifications system
+The lightweight beautiful notifications system
