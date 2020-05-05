@@ -1,0 +1,34 @@
+{
+  "name": "nano-notif",
+  "version": "1.0.0",
+  "module": "./dist/index.js",
+  "author": "Artem Shibakow",
+  "license": "MIT",
+  "scripts": {
+    "serve": "parcel lib/index.html",
+    "dev": "tsc -w",
+    "build": "npm run build:js && npm run build:css",
+    "build:js": "tsc",
+    "build:css": "postcss \"./src/NanoNotif.css\" > \"./lib/NanoNotif.css\"",
+    "lint": "npm run lint:js && npm run lint:types",
+    "lint:js": "eslint --ext .ts . src",
+    "lint:types": "tsc --noEmit",
+    "prepublishOnly": "yarn run build"
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
+    "@typescript-eslint/parser": "^2.31.0",
+    "autoprefixer": "9.7.6",
+    "cssnano": "4.1.10",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "parcel": "^1.12.4",
+    "postcss-cli": "7.1.1",
+    "prettier": "^2.0.5",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {}
+}

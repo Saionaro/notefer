@@ -1,0 +1,21 @@
+.notif-maker {
+  position: fixed;
+  top: 50;
+  left: 0;
+}
+
+.notif-maker2 {
+  position: fixed;
+  top: 150;
+  left: 0;
+}
+
+.notif-maker3 {
+  position: fixed;
+  top: 250;
+  left: 0;
+}
+
+.long-notif {
+  border-color: red;
+}

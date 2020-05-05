@@ -1,0 +1,42 @@
+.nano-notif {
+  margin: 16px;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.nano-notif__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nano-notif__unit {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  box-shadow: 0 0 6px #cccccc;
+  padding: 8px 16px;
+  border-radius: 8px;
+  width: 260px;
+  transform: translateX(0px);
+  transition-property: transform;
+  transition-duration: 0.5s;
+  will-change: transform;
+}
+
+.nano-notif__unit:hover {
+  background-color: #fbfbfb;
+}
+
+.nano-notif__title {
+  margin: 0;
+  font-size: 18px;
+}
+
+.nano-notif__text {
+  margin: 4px 0 0 0;
+  font-size: 12px;
+}
