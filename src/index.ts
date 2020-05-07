@@ -9,7 +9,7 @@ const CLASSNAMES = {
   LIST: "nano-notif__list",
 };
 
-interface Notification {
+export interface Notification {
   title: string;
   text: string;
 
