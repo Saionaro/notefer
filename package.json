@@ -3,7 +3,7 @@
   "description": "The lightweight beautiful notifications system",
   "version": "1.0.0",
   "scripts": {
-    "serve": "parcel site/index.html --no-source-maps",
+    "serve": "npm run build && parcel site/index.html --no-source-maps",
     "dev": "tsc -w",
     "build": "npm run build:js && npm run build:css",
     "build:js": "rollup --config",
