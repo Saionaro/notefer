@@ -1,14 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
-    "module": "CommonJS",
+    "target": "ES5",
+    "module": "ES2015",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
     "outDir": "./lib",
     "sourceMap": false,
-    "declaration": true,
-    "declarationDir": "typings"
+    "declaration": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]

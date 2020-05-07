@@ -3,17 +3,18 @@
   "description": "The lightweight beautiful notifications system",
   "version": "1.0.0",
   "scripts": {
-    "serve": "parcel site/index.html",
+    "serve": "parcel site/index.html --no-source-maps",
     "dev": "tsc -w",
     "build": "npm run build:js && npm run build:css",
-    "build:js": "tsc",
-    "build:css": "postcss \"./src/NanoNotif.css\" > \"./lib/NanoNotif.css\"",
+    "build:js": "rollup --config",
+    "build:css": "node scripts/buildCss.js",
+    "build:site": "parcel build site/index.html --no-source-maps",
     "lint": "npm run lint:js && npm run lint:types",
     "lint:js": "eslint --ext .ts . src",
-    "lint:types": "tsc --noEmit",
-    "prepublishOnly": "yarn run build"
+    "lint:types": "tsc --noEmit"
   },
-  "main": "./lib/NanoNotif.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "author": "Saionaro <shibakow@gmail.com>",
   "license": "MIT",
   "keywords": [
@@ -36,8 +37,14 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
     "parcel": "^1.12.4",
+    "parcel-plugin-clean-dist": "0.0.6",
+    "postcss": "^7.0.29",
     "postcss-cli": "7.1.1",
+    "postcss-load-config": "^2.1.0",
     "prettier": "^2.0.5",
+    "rollup": "^2.8.2",
+    "rollup-plugin-terser": "^5.3.0",
+    "rollup-plugin-typescript2": "^0.27.0",
     "typescript": "^3.8.3"
   },
   "dependencies": {}

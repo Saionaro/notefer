@@ -1,4 +1,4 @@
-import { NanoNotif } from "../lib/NanoNotif.js";
+import { NanoNotif } from "../lib/index.js";
 
 document.addEventListener("DOMContentLoaded", function () {
   const nanoNotif = new NanoNotif();
