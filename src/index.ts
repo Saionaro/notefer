@@ -1,15 +1,9 @@
 import { CLASSNAMES } from "./classNames.js";
+import { DIMENSIONS } from "./tracker.js";
 
 const GAP = 4;
 const CHECK_INTERVAL = 500;
 const DEFAULT_LIFETIME = 5000;
-// const CLASSNAMES = {
-//   CONTAINER: "nano-notif",
-//   UNIT: "nano-notif__unit",
-//   TITLE: "nano-notif__title",
-//   TEXT: "nano-notif__text",
-//   LIST: "nano-notif__list",
-// };
 
 export interface Notification {
   title: string;
@@ -119,7 +113,7 @@ export class NanoNotif {
   }
 
   private removeNotification(elem: HTMLElement): void {
-    elem.style.transform += " translateX(320px)";
+    elem.style.transform += ` translateX(${DIMENSIONS.shift})`;
     setTimeout(elem.remove.bind(elem), 1000);
   }
 
@@ -154,7 +148,7 @@ export class NanoNotif {
     titleNode.textContent = notif.title;
     textNode.textContent = notif.text;
 
-    node.style.transform = "translateX(320px)";
+    node.style.transform = `translateX(${DIMENSIONS.shift})`;
 
     node.appendChild(titleNode);
     node.appendChild(textNode);

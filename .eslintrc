@@ -10,5 +10,5 @@
     "browser": true,
     "es2020": true
   },
-  "ignorePatterns": ["dist/", "node_modules/", "typings/"]
+  "ignorePatterns": ["dist/", "node_modules/", "typings/", "*.js"]
 }
