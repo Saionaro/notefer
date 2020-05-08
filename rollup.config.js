@@ -8,5 +8,10 @@ export default {
     file: "./lib/index.js",
     format: "umd",
   },
-  plugins: [typescript(), terser()],
+  plugins: [
+    typescript(),
+    terser({
+      output: { comments: false },
+    }),
+  ],
 };

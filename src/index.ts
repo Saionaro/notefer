@@ -1,13 +1,15 @@
+import { CLASSNAMES } from "./classNames.js";
+
 const GAP = 4;
 const CHECK_INTERVAL = 500;
 const DEFAULT_LIFETIME = 5000;
-const CLASSNAMES = {
-  CONTAINER: "nano-notif",
-  UNIT: "nano-notif__unit",
-  TITLE: "nano-notif__title",
-  TEXT: "nano-notif__text",
-  LIST: "nano-notif__list",
-};
+// const CLASSNAMES = {
+//   CONTAINER: "nano-notif",
+//   UNIT: "nano-notif__unit",
+//   TITLE: "nano-notif__title",
+//   TEXT: "nano-notif__text",
+//   LIST: "nano-notif__list",
+// };
 
 export interface Notification {
   title: string;
