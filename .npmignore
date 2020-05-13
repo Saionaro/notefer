@@ -1,3 +1,14 @@
 site
 dist
+src
+scripts
+.github
 .cache
+.eslintignore
+.eslintrc
+.releaserc.js
+commitlint.config.js
+lefthook.yml
+postcss.config.js
+rollup.config.js
+tsconfig.json
