@@ -26,6 +26,7 @@
   transition-property: transform;
   transition-duration: 0.5s;
   will-change: transform;
+  font-family: sans-serif;
 }
 
 .notefer__unit:hover {
@@ -39,7 +40,7 @@
 
 .notefer__text {
   margin: 4px 0 0 0;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 @media (max-width: 600px) {

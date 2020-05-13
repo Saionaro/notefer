@@ -1,38 +1,72 @@
+import faker from "faker";
+
 import { pushNotification } from "../lib/index.js";
 
 document.addEventListener("DOMContentLoaded", function () {
-  document.querySelector(".notif-maker").addEventListener("click", function () {
+  let autoPlay = true;
+  const maker1 = document.querySelector(".notif-maker--1");
+  const maker2 = document.querySelector(".notif-maker--2");
+  const maker3 = document.querySelector(".notif-maker--3");
+  const start = document.querySelector(".start-autoplay");
+  const stop = document.querySelector(".stop-autoplay");
+
+  const spawners = [maker1, maker2, maker3];
+
+  const spawnOne = () =>
     pushNotification({
-      title: "Hi, man!",
-      text: "How are you?",
+      title: `New Comment`,
+      text: `${faker.name.findName()}: ${faker.lorem.sentence()}`,
     });
-  });
-  document
-    .querySelector(".notif-maker2")
-    .addEventListener("click", function () {
-      pushNotification({
-        title: "I long",
-        text: "How are you?",
-        lifetime: 600000,
-        className: "long-notif",
-      });
+
+  const spawnLong = () =>
+    pushNotification({
+      title: `Message: ${faker.name.findName()}`,
+      text: `${faker.lorem.sentence()}`,
+      lifetime: 10000,
+      className: "long-notif",
     });
-  document
-    .querySelector(".notif-maker3")
-    .addEventListener("click", function () {
-      pushNotification([
-        {
-          title: "I group!",
-          text: "How are you?",
-        },
-        {
-          title: "I group!",
-          text: "How are you?",
-        },
-        {
-          title: "I group!",
-          text: "How are you?",
-        },
-      ]);
-    });
+
+  const spawnThree = () =>
+    pushNotification([
+      {
+        title: "Likes",
+        text: `${faker.name.firstName()} ❤️ your post!`,
+      },
+      {
+        title: "Likes",
+        text: `${faker.name.firstName()} ❤️ your post!`,
+      },
+      {
+        title: "Likes",
+        text: `${faker.name.firstName()} ❤️ your post!`,
+      },
+    ]);
+
+  const toggle = (switchOn) => {
+    autoPlay = switchOn;
+
+    for (const spawner of spawners) {
+      spawner.classList.toggle("button--hidden", switchOn);
+    }
+
+    stop.classList.toggle("button--hidden", !switchOn);
+    start.classList.toggle("button--hidden", switchOn);
+  };
+
+  maker1.addEventListener("click", spawnOne);
+  maker2.addEventListener("click", spawnLong);
+  maker3.addEventListener("click", spawnThree);
+  start.addEventListener("click", () => toggle(true));
+  stop.addEventListener("click", () => toggle(false));
+
+  const things = [spawnOne, spawnLong, spawnThree];
+
+  const tick = () => {
+    if (autoPlay) {
+      faker.helpers.randomize(things)();
+    }
+  };
+
+  tick();
+  setInterval(tick, 2000);
 });

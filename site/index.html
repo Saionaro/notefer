@@ -2,14 +2,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Notefer | The lightweight notifications system</title>
     <link rel="stylesheet" href="../lib/index.css" />
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <button class="notif-maker">Make notif</button>
-    <button class="notif-maker2">Make long notif</button>
-    <button class="notif-maker3">Make many notifs</button>
+    <header>
+      <h1 class="header__title">notefer</h1>
+
+      <div class="header__links">
+        <a
+          href="https://github.com/Saionaro/notefer"
+          target="_blank"
+          rel="nofollow noopener"
+          >github</a
+        >
+        <a
+          href="https://www.npmjs.com/package/notefer"
+          target="_blank"
+          rel="nofollow noopener"
+          >npmjs</a
+        >
+      </div>
+    </header>
+
+    <div class="wrapper">
+      <button class="button stop-autoplay">Stop autoplay</button>
+      <button class="button start-autoplay button--hidden">
+        Start autoplay
+      </button>
+      <button class="button notif-maker--1 button--hidden">Spawn notif</button>
+      <button class="button notif-maker--2 button--hidden">
+        Spawn long notif
+      </button>
+      <button class="button notif-maker--3 button--hidden">
+        Spawn three notifs
+      </button>
+    </div>
 
     <script src="./index.js"></script>
   </body>
