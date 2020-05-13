@@ -1,17 +1,17 @@
-.nano-notif {
+.notifer {
   margin: 16px;
   position: fixed;
   top: 0;
   right: 0;
 }
 
-.nano-notif__list {
+.notifer__list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.nano-notif__unit {
+.notifer__unit {
   cursor: pointer;
   position: absolute;
   box-sizing: border-box;
@@ -28,26 +28,26 @@
   will-change: transform;
 }
 
-.nano-notif__unit:hover {
+.notifer__unit:hover {
   background-color: #fbfbfb;
 }
 
-.nano-notif__title {
+.notifer__title {
   margin: 0;
   font-size: 18px;
 }
 
-.nano-notif__text {
+.notifer__text {
   margin: 4px 0 0 0;
   font-size: 12px;
 }
 
 @media (max-width: 600px) {
-  .nano-notif {
+  .notifer {
     margin: 2.5vw;
   }
 
-  .nano-notif__unit {
+  .notifer__unit {
     width: 95vw;
   }
 }

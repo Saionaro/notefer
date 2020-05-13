@@ -1,7 +1,7 @@
 export const CLASSNAMES = {
-  CONTAINER: "nano-notif",
-  UNIT: "nano-notif__unit",
-  TITLE: "nano-notif__title",
-  TEXT: "nano-notif__text",
-  LIST: "nano-notif__list",
+  CONTAINER: "notifer",
+  UNIT: "notifer__unit",
+  TITLE: "notifer__title",
+  TEXT: "notifer__text",
+  LIST: "notifer__list",
 };

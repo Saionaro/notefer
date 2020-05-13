@@ -1,5 +1,5 @@
 {
-  "name": "nano-notif",
+  "name": "notifer",
   "description": "The lightweight beautiful notifications system",
   "version": "1.0.0",
   "scripts": {
@@ -21,11 +21,11 @@
     "notifications",
     "nano"
   ],
-  "repository": "git@github.com:Saionaro/nano-notif.git",
+  "repository": "git@github.com:Saionaro/notifer.git",
   "bugs": {
-    "url": "https://github.com/Saionaro/nano-notif/issues"
+    "url": "https://github.com/Saionaro/notifer/issues"
   },
-  "homepage": "https://github.com/Saionaro/nano-notif",
+  "homepage": "https://github.com/Saionaro/notifer",
   "browserslist": [
     "defaults"
   ],
