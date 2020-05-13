@@ -20,7 +20,7 @@ interface ExtendedNotification extends Notification {
   timestamp: number;
 }
 
-export class NanoNotif {
+export class Notifer {
   private notifications: ExtendedNotification[] = [];
   private containerNode: HTMLElement = null;
   private checkInterval: number = null;
@@ -29,7 +29,7 @@ export class NanoNotif {
     this.clickHandler = this.clickHandler.bind(this);
   }
 
-  push(notif: Notification): void {
+  push(notif: Notification | Notification[]): void {
     const toPush = Array.isArray(notif) ? notif : [notif];
     const container = this.getContainer().querySelector(`.${CLASSNAMES.LIST}`);
 
@@ -175,3 +175,15 @@ export class NanoNotif {
     }
   }
 }
+
+let instance: Notifer | null = null;
+
+export const pushNotification = (
+  notification: Notification | Notification[]
+): void => {
+  if (!instance) {
+    instance = new Notifer();
+  }
+
+  instance.push(notification);
+};

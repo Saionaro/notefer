@@ -19,6 +19,7 @@
   "license": "MIT",
   "keywords": [
     "notifications",
+    "tiny",
     "nano"
   ],
   "repository": "git@github.com:Saionaro/notifer.git",

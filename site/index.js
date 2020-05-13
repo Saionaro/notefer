@@ -1,10 +1,8 @@
-import { NanoNotif } from "../lib/index.js";
+import { pushNotification } from "../lib/index.js";
 
 document.addEventListener("DOMContentLoaded", function () {
-  const nanoNotif = new NanoNotif();
-
   document.querySelector(".notif-maker").addEventListener("click", function () {
-    nanoNotif.push({
+    pushNotification({
       title: "Hi, man!",
       text: "How are you?",
     });
@@ -12,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelector(".notif-maker2")
     .addEventListener("click", function () {
-      nanoNotif.push({
+      pushNotification({
         title: "I long",
         text: "How are you?",
         lifetime: 600000,
@@ -22,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelector(".notif-maker3")
     .addEventListener("click", function () {
-      nanoNotif.push([
+      pushNotification([
         {
           title: "I group!",
           text: "How are you?",
