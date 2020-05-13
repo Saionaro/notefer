@@ -42,7 +42,7 @@ export class Notifer {
     container.appendChild(fragment);
 
     if (!this.checkInterval) {
-      this.checkInterval = setInterval(
+      this.checkInterval = window.setInterval(
         this.clearTick.bind(this),
         CHECK_INTERVAL
       );
