@@ -2,6 +2,8 @@
 
 The lightweight notifications system UI
 
+[DEMO](https://saionaro.github.io/notefer/)
+
 ## Getting started
 
 ### Installation
