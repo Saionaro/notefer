@@ -1,17 +1,17 @@
-.notifer {
+.notefer {
   margin: 16px;
   position: fixed;
   top: 0;
   right: 0;
 }
 
-.notifer__list {
+.notefer__list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.notifer__unit {
+.notefer__unit {
   cursor: pointer;
   position: absolute;
   box-sizing: border-box;
@@ -28,26 +28,26 @@
   will-change: transform;
 }
 
-.notifer__unit:hover {
+.notefer__unit:hover {
   background-color: #fbfbfb;
 }
 
-.notifer__title {
+.notefer__title {
   margin: 0;
   font-size: 18px;
 }
 
-.notifer__text {
+.notefer__text {
   margin: 4px 0 0 0;
   font-size: 12px;
 }
 
 @media (max-width: 600px) {
-  .notifer {
+  .notefer {
     margin: 2.5vw;
   }
 
-  .notifer__unit {
+  .notefer__unit {
     width: 95vw;
   }
 }

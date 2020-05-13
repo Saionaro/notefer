@@ -20,7 +20,7 @@ interface ExtendedNotification extends Notification {
   timestamp: number;
 }
 
-export class Notifer {
+export class Notefer {
   private notifications: ExtendedNotification[] = [];
   private containerNode: HTMLElement = null;
   private checkInterval: number = null;
@@ -176,13 +176,13 @@ export class Notifer {
   }
 }
 
-let instance: Notifer | null = null;
+let instance: Notefer | null = null;
 
 export const pushNotification = (
   notification: Notification | Notification[]
 ): void => {
   if (!instance) {
-    instance = new Notifer();
+    instance = new Notefer();
   }
 
   instance.push(notification);

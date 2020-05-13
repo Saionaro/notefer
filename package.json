@@ -1,5 +1,5 @@
 {
-  "name": "notifer",
+  "name": "notefer",
   "description": "The lightweight beautiful notifications system",
   "version": "1.0.0",
   "scripts": {
@@ -24,11 +24,11 @@
     "tiny",
     "nano"
   ],
-  "repository": "git@github.com:Saionaro/notifer.git",
+  "repository": "git@github.com:Saionaro/notefer.git",
   "bugs": {
-    "url": "https://github.com/Saionaro/notifer/issues"
+    "url": "https://github.com/Saionaro/notefer/issues"
   },
-  "homepage": "https://github.com/Saionaro/notifer",
+  "homepage": "https://github.com/Saionaro/notefer",
   "browserslist": [
     "defaults"
   ],
