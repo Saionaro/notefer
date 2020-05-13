@@ -1,4 +1,4 @@
-# notefer [![npm version](https://badge.fury.io/js/notefer.svg)](https://badge.fury.io/js/notefer) ![CI](https://github.com/Saionaro/notefer/workflows/CI/badge.svg?branch=master)
+# notefer [![npm version](https://badgen.net/npm/v/notefer)](https://www.npmjs.com/package/notefer) ![CI](https://github.com/Saionaro/notefer/workflows/CI/badge.svg?branch=master) [![minzip](https://badgen.net/bundlephobia/minzip/notefer)](https://bundlephobia.com/result?p=notefer) [![license](https://badgen.net/github/license/micromatch/micromatch)]()
 
 The lightweight beautiful notifications system
 
@@ -6,13 +6,11 @@ The lightweight beautiful notifications system
 
 ### Installation
 
-First of all install the package via `NPM`:
+First of all install the package:
 
-`npm install notefer`
+`NPM`: `npm install notefer`
 
-or `Yarn`:
-
-`yarn add notefer`
+`Yarn`: `yarn add notefer`
 
 ### Import and usage
 
