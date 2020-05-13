@@ -1,0 +1,11 @@
+pre-commit:
+  commands:
+    linter:
+      files: git diff --name-only @{push}
+      glob: "*.js,*.ts"
+      run: npm run lint:js:hook {staged_files} && git add {staged_files}
+
+    prettier:
+      files: git diff --name-only @{push}
+      glob: "*.js,*.ts"
+      run: prettier {staged_files} --write && git add {staged_files}
