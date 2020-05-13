@@ -1,6 +1,6 @@
 # notefer [![npm version](https://badgen.net/npm/v/notefer)](https://www.npmjs.com/package/notefer) ![CI](https://github.com/Saionaro/notefer/workflows/CI/badge.svg?branch=master) [![minzip](https://badgen.net/bundlephobia/minzip/notefer)](https://bundlephobia.com/result?p=notefer) [![license](https://badgen.net/github/license/micromatch/micromatch)]()
 
-The lightweight notifications system
+The lightweight notifications system UI
 
 ## Getting started
 
