@@ -8,9 +8,10 @@
     "build": "npm run build:js && npm run build:css",
     "build:js": "rollup --config",
     "build:css": "node scripts/buildCss.js",
-    "build:site": "parcel build site/index.html --no-source-maps",
+    "build:site": "npm run build && parcel build site/index.html --no-source-maps",
     "lint": "npm run lint:js && npm run lint:types",
     "lint:js": "eslint --ext .ts . src",
+    "lint:js:hook": "eslint --fix",
     "lint:types": "tsc --noEmit",
     "release": "semantic-release"
   },
@@ -32,6 +33,7 @@
     "defaults"
   ],
   "devDependencies": {
+    "@arkweid/lefthook": "^0.7.1",
     "@semantic-release/git": "^9.0.0",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.31.0",
