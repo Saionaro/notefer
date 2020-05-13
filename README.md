@@ -30,7 +30,7 @@ pushNotification({
 
 ### `pushNotification(notification: Notification | Notification[]): void`
 
-```
+```ts
 interface Notification {
   title: string; // notification title
   text: string; // notification body
