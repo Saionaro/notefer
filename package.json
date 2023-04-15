@@ -6,7 +6,7 @@
     "dev": "vite --config ./vite-site.config.ts",
     "build": "vite build --config ./vite.config.ts",
     "build:site": "vite --config ./vite-site.config.ts build",
-    "lint": "npm run lint:js && npm run lint:types",
+    "lint": "npm run lint:js",
     "lint:js": "eslint --ext .ts . src",
     "release": "semantic-release"
   },
