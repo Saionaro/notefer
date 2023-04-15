@@ -15,7 +15,7 @@ jobs:
           node-version: 16
           cache: 'npm'
       - run: npm ci
-      - run: build:site
+      - run: npm run build:site
       - name: Publish Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
