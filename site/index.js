@@ -1,6 +1,7 @@
 import faker from "faker";
 
-import { pushNotification } from "../lib/index.js";
+import { pushNotification } from "../src/index.ts";
+import "../src/index.css";
 
 document.addEventListener("DOMContentLoaded", function () {
   let autoPlay = true;

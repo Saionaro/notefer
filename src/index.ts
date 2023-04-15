@@ -1,5 +1,6 @@
 import { CLASSNAMES } from "./classNames.js";
 import { DIMENSIONS } from "./tracker.js";
+import "./index.css";
 
 const GAP = 4;
 const CHECK_INTERVAL = 500;

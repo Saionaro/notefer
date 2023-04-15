@@ -1,20 +1,23 @@
 name: Publish Pages
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   publish-pages:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
-
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 'lts'
+          cache: 'npm'
+      - run: npm ci
+      - run: build:site
       - name: Publish Pages
-        uses: JamesIves/github-pages-deploy-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BASE_BRANCH: master
-          BRANCH: gh-pages
-          FOLDER: dist
-          BUILD_SCRIPT: npm ci && npm run build:site
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: site-build
+          branch: gh-pages

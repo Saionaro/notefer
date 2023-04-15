@@ -6,49 +6,38 @@ jobs:
   checking:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v1
-
-      - name: Setup Node.JS
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: "12.x"
+          node-version: 'lts'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
 
-      - name: Install deps
-        run: npm ci
+  # release:
+  #   needs: checking
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/master'
+  #   steps:
+  #     - name: Checkout the repository
+  #       uses: actions/checkout@v1
 
-      - name: Run linters
-        run: npm run lint
+  #     - name: Setup Node.JS
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         always-auth: true
+  #         node-version: '12.x'
 
-      - name: Building
-        run: npm run build
+  #     - name: Install deps
+  #       run: npm ci
 
-  release:
-    needs: checking
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
-    steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v1
+  #     - name: Building
+  #       run: npm run build
 
-      - name: Setup Node.JS
-        uses: actions/setup-node@v1
-        with:
-          always-auth: true
-          node-version: "12.x"
-
-      - name: Install deps
-        run: npm ci
-
-      - name: Disable Lefthook
-        run: echo "::set-env name=LEFTHOOK::0"
-
-      - name: Building
-        run: npm run build
-
-      - name: Release
-        run: npm run release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+  #     - name: Release
+  #       run: npm run release
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+  #         NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
