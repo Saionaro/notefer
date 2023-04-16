@@ -5,10 +5,17 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": [
+    "@typescript-eslint"
+  ],
   "env": {
     "browser": true,
-    "esnext": true
+    "es2022": true
   },
-  "ignorePatterns": ["dist/", "node_modules/", "typings/", "*.js"]
+  "ignorePatterns": [
+    "dist/",
+    "node_modules/",
+    "typings/",
+    "*.js"
+  ]
 }

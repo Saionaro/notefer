@@ -1,4 +1,6 @@
-export const debounce = (fn: Function, threshold: number): Function => {
+type GenericFunction = (...args: unknown[]) => unknown;
+
+export const debounce = (fn: GenericFunction, threshold: number): GenericFunction => {
   let isCd = false;
   let savedArgs: unknown[]|null = null;
   return (...args: unknown[]) => {
