@@ -11,10 +11,11 @@ export const DIMENSIONS = {
 
 const recognizeWidth = debounce(() => {
   const width = document.documentElement.clientWidth;
-
   DIMENSIONS.shift = width > MOBILE_BREAKPOINT ? DEFAULT_SIFT : MOBILE_SHIFT;
 }, UPDATE_SHIFT_FREQUENCY);
 
-window.addEventListener("resize", () => recognizeWidth());
+window.addEventListener("resize", ()=>recognizeWidth(), {
+  passive: true,
+});
 
 recognizeWidth();

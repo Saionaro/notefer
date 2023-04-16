@@ -8,7 +8,7 @@
   "plugins": ["@typescript-eslint"],
   "env": {
     "browser": true,
-    "es2020": true
+    "esnext": true
   },
   "ignorePatterns": ["dist/", "node_modules/", "typings/", "*.js"]
 }

@@ -1,3 +1,10 @@
+:root {
+  --notefer-background-color: #ffffff;
+  --notefer-border-color: #cccccc;
+  --notefer-transition-movement: 0.5s;
+  --notefer-transition-interaction: 0.25s;
+}
+
 .notefer {
   margin: 16px;
   position: fixed;
@@ -16,17 +23,23 @@
   position: absolute;
   box-sizing: border-box;
   right: 0;
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  box-shadow: 0 0 6px #cccccc;
-  padding: 8px 16px;
-  border-radius: 8px;
+  background-color: var(--notefer-background-color);
+  box-shadow: 0 0 4px var(--notefer-border-color);
+  padding: 16px;
+  border-radius: 6px;
   width: 260px;
   transform: translateX(0px);
-  transition-property: transform;
-  transition-duration: 0.5s;
+  transition-property: transform, background-color;
+  transition-duration:
+    var(--notefer-transition-movement),
+    var(--notefer-transition-interaction);
+  transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1), linear;
   will-change: transform;
   font-family: sans-serif;
+}
+
+.notefer__unit--hovered {
+  z-index: 5;
 }
 
 .notefer__unit:hover {
@@ -50,5 +63,12 @@
 
   .notefer__unit {
     width: 95vw;
+  }
+}
+
+@media (prefers-reduced-motion) {
+  :root {
+    --notefer-transition-movement: 0s;
+    --notefer-transition-interaction: 0s;
   }
 }

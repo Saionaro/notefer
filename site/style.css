@@ -34,17 +34,22 @@ body {
   display: none;
 }
 
-.button:hover {
+.button:hover,
+.button:focus {
   color: #fff;
   background-color: #009688;
 }
 
-.button + .button {
+.button+.button {
   margin-left: 16px;
 }
 
 .long-notif {
-  border-color: #009688;
+  box-shadow: 0 0 4px #009688;
+}
+
+.eternal-notif {
+  box-shadow: 0 0 4px #a0a307;
 }
 
 @media (max-width: 800px) {
@@ -52,7 +57,7 @@ body {
     flex-direction: column;
   }
 
-  .button + .button {
+  .button+.button {
     margin-left: 0;
     margin-top: 16px;
   }

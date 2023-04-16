@@ -1,20 +1,45 @@
-import { CLASSNAMES } from "./classNames.js";
-import { DIMENSIONS } from "./tracker.js";
+import { DIMENSIONS } from "./tracker";
 import "./index.css";
 
-const GAP = 4;
+const GAP = 6;
 const CHECK_INTERVAL = 500;
 const DEFAULT_LIFETIME = 5000;
+const INTERVAL_DEFAULT_ID = -1;
+const CLASSNAMES = {
+  CONTAINER: "notefer",
+  UNIT: "notefer__unit",
+  UNIT_HOVERED: "notefer__unit--hovered",
+  TITLE: "notefer__title",
+  TEXT: "notefer__text",
+  LIST: "notefer__list",
+};
+
+const addScale = (node: HTMLElement):void=>{
+  if (!node.style.transform.includes('scale'))
+    node.style.transform += 'scale(1.1)';
+};
 
 export interface Notification {
+  /**
+   * Notification title, short bold text
+   */
   title: string;
+  /**
+   * Notification body, main content
+   */
   text: string;
-
+  /**
+   * Notification lifetime, ms
+   * @default 5000
+   */
   lifetime?: number;
+  /**
+   * Additional classname to append to a single notification li
+   */
   className?: string;
 }
 
-interface ExtendedNotification extends Notification {
+interface Meta extends Notification {
   id: string;
   node: HTMLElement;
   shift: number;
@@ -22,17 +47,22 @@ interface ExtendedNotification extends Notification {
 }
 
 export class Notefer {
-  private notifications: ExtendedNotification[] = [];
-  private containerNode: HTMLElement = null;
-  private checkInterval: number = null;
+  private notifications: Meta[] = [];
+  private hoveredId: string|null = null;
+  private toClearHover: Record<string, true> = {};
+  private containerNode: HTMLElement|null = null;
+  private listNode: HTMLUListElement|null = null;
+  private checkInterval: number = INTERVAL_DEFAULT_ID;
 
   constructor() {
     this.clickHandler = this.clickHandler.bind(this);
+    this.hoverHandler = this.hoverHandler.bind(this);
+    this.leaveHandler = this.leaveHandler.bind(this);
   }
 
   push(notif: Notification | Notification[]): void {
     const toPush = Array.isArray(notif) ? notif : [notif];
-    const container = this.getContainer().querySelector(`.${CLASSNAMES.LIST}`);
+    const listElement = this.getList();
 
     const fragment = document.createDocumentFragment();
 
@@ -40,9 +70,9 @@ export class Notefer {
       fragment.appendChild(this.cookNotification(toPush[i], i));
     }
 
-    container.appendChild(fragment);
+    listElement.appendChild(fragment);
 
-    if (!this.checkInterval) {
+    if (this.checkInterval===INTERVAL_DEFAULT_ID) {
       this.checkInterval = window.setInterval(
         this.clearTick.bind(this),
         CHECK_INTERVAL
@@ -53,7 +83,7 @@ export class Notefer {
   private cookNotification(notif: Notification, index: number): HTMLElement {
     const node = this.createNotification(notif);
     const timestamp = Date.now();
-    const cloned: ExtendedNotification = {
+    const meta: Meta = {
       ...notif,
       id: `${timestamp}_${index}`,
       node,
@@ -61,15 +91,15 @@ export class Notefer {
       shift: 0,
     };
 
-    node.dataset.id = cloned.id;
+    node.dataset.id = meta.id;
 
     if (this.notifications.length) {
       const last = this.notifications[this.notifications.length - 1];
-      cloned.shift = last.shift + last.node.offsetHeight + GAP;
+      meta.shift = last.shift + last.node.offsetHeight + GAP;
     }
 
-    cloned.node.style.transform += ` translateY(${cloned.shift}px)`;
-    this.notifications.push(cloned);
+    meta.node.style.transform += ` translateY(${meta.shift}px)`;
+    this.notifications.push(meta);
 
     return node;
   }
@@ -80,15 +110,31 @@ export class Notefer {
     let shift = 0;
 
     for (let i = 0; i < this.notifications.length; i++) {
-      const timeDelta = this.notifications[i].lifetime || DEFAULT_LIFETIME;
+      const meta = this.notifications[i];
+      const lifetime = meta.lifetime || DEFAULT_LIFETIME;
+      const isStale = currentTime - meta.timestamp > lifetime;
 
-      if (currentTime - this.notifications[i].timestamp > timeDelta) {
-        this.removeNotification(this.notifications[i].node);
+      if (this.toClearHover[meta.id])
+      {
+        meta.node.classList.toggle(CLASSNAMES.UNIT_HOVERED, false);
+        delete this.toClearHover[meta.id];
+      }
+
+      if (meta.id==this.hoveredId) {
+        meta.node.classList.toggle(CLASSNAMES.UNIT_HOVERED, true)
+        addScale(meta.node);
+        if (!isStale) shift += meta.node.offsetHeight + GAP;
+      } else if (isStale) {
+        this.removeNotification(meta.node);
         toRemove[i] = true;
       } else {
-        this.notifications[i].shift = shift;
-        this.notifications[i].node.style.transform = `translateY(${shift}px)`;
-        shift += this.notifications[i].node.offsetHeight + GAP;
+        meta.shift = shift;
+        meta.node.style.transform = `translateY(${shift}px)`;
+        shift += meta.node.offsetHeight + GAP;
+        if (meta.node.classList.contains(CLASSNAMES.UNIT_HOVERED))
+        {
+          this.toClearHover[meta.id] = true;
+        }
       }
     }
 
@@ -98,7 +144,7 @@ export class Notefer {
 
     if (!this.notifications.length) {
       clearInterval(this.checkInterval);
-      this.checkInterval = null;
+      this.checkInterval = INTERVAL_DEFAULT_ID;
     }
   }
 
@@ -108,6 +154,18 @@ export class Notefer {
     if (!node) {
       node = this.createContainer();
       this.containerNode = node;
+    }
+
+    return node;
+  }
+
+  private getList(): HTMLUListElement {
+    let node = this.listNode;
+
+    if (!node) {
+      const container = this.getContainer();
+      node = container.querySelector(`.${CLASSNAMES.LIST}`) as HTMLUListElement;
+      this.listNode = node;
     }
 
     return node;
@@ -126,6 +184,8 @@ export class Notefer {
     ul.classList.add(CLASSNAMES.LIST);
     node.appendChild(ul);
     node.addEventListener("click", this.clickHandler);
+    node.addEventListener("mouseover", this.hoverHandler);
+    node.addEventListener("mouseout", this.leaveHandler);
     document.body.appendChild(node);
 
     return node;
@@ -140,7 +200,7 @@ export class Notefer {
       node.classList.add(notif.className);
     }
 
-    const titleNode = document.createElement("h2");
+    const titleNode = document.createElement("h4");
     const textNode = document.createElement("p");
 
     titleNode.classList.add(CLASSNAMES.TITLE);
@@ -158,21 +218,47 @@ export class Notefer {
   }
 
   private clickHandler(event: MouseEvent): void {
-    if (event.target instanceof Element) {
-      const elem = event.target.closest(`.${CLASSNAMES.UNIT}`);
+    if (!(event.target instanceof Element)) return;
+    const elem = event.target.closest(`.${CLASSNAMES.UNIT}`);
 
-      if (elem instanceof HTMLElement) {
-        this.hideNotif(elem.dataset.id);
+    if (elem instanceof HTMLElement) {
+      this.hideNotif(elem.dataset.id as string);
+    }
+  }
+
+  private hoverHandler(event: MouseEvent): void {
+    if (!(event.target instanceof Element)) return;
+    const elem = event.target.closest(`.${CLASSNAMES.UNIT}`);
+
+    if (elem instanceof HTMLElement) {
+      this.hoveredId = elem.dataset.id as string;
+      // console.log('hoverHandler', elem.dataset.id)
+    }
+  }
+
+  private leaveHandler(event: MouseEvent): void {
+    if (!(event.target instanceof Element)) return;
+    const elem = event.target.closest(`.${CLASSNAMES.UNIT}`);
+
+    if (elem instanceof HTMLElement) {
+      this.hoveredId = null;
+      // console.log('leaveHandler', elem.dataset.id)
+    }
+  }
+
+  private getNotif(id: string): Meta | void {
+    for (const notif of this.notifications) {
+      if (notif.id === id) {
+          return notif;
       }
     }
   }
 
   private hideNotif(id: string): void {
-    for (const notif of this.notifications) {
-      if (notif.id === id) {
-        notif.lifetime = 1;
-        break;
-      }
+    const notif = this.getNotif(id);
+    if (notif)
+    {
+      notif.lifetime = 1;
     }
   }
 }

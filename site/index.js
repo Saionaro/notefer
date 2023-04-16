@@ -2,16 +2,18 @@ import faker from "faker";
 
 import { pushNotification } from "../src/index.ts";
 import "../src/index.css";
+import "./style.css";
 
 document.addEventListener("DOMContentLoaded", function () {
   let autoPlay = true;
   const maker1 = document.querySelector(".notif-maker--1");
   const maker2 = document.querySelector(".notif-maker--2");
   const maker3 = document.querySelector(".notif-maker--3");
+  const maker4 = document.querySelector(".notif-maker--4");
   const start = document.querySelector(".start-autoplay");
   const stop = document.querySelector(".stop-autoplay");
 
-  const spawners = [maker1, maker2, maker3];
+  const spawners = [maker1, maker2, maker3, maker4];
 
   const spawnOne = () =>
     pushNotification({
@@ -25,6 +27,14 @@ document.addEventListener("DOMContentLoaded", function () {
       text: `${faker.lorem.sentence()}`,
       lifetime: 10000,
       className: "long-notif",
+    });
+
+  const spawnEternal = () =>
+    pushNotification({
+      title: `Eternal: ${faker.name.findName()}`,
+      text: `${faker.lorem.sentence()}`,
+      lifetime: Infinity,
+      className: "eternal-notif",
     });
 
   const spawnThree = () =>
@@ -56,7 +66,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   maker1.addEventListener("click", spawnOne);
   maker2.addEventListener("click", spawnLong);
-  maker3.addEventListener("click", spawnThree);
+  maker3.addEventListener("click", spawnEternal);
+  maker4.addEventListener("click", spawnThree);
   start.addEventListener("click", () => toggle(true));
   stop.addEventListener("click", () => toggle(false));
 

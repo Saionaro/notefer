@@ -1,8 +1,7 @@
-export const debounce = (fn, trashold) => {
+export const debounce = (fn: Function, threshold: number): Function => {
   let isCd = false;
-  let savedArgs = null;
-
-  return (...args) => {
+  let savedArgs: unknown[]|null = null;
+  return (...args: unknown[]) => {
     if (isCd) {
       savedArgs = args;
       return;
@@ -17,10 +16,10 @@ export const debounce = (fn, trashold) => {
         fn(...savedArgs);
         savedArgs = null;
 
-        setTimeout(() => (isCd = false), trashold);
+        setTimeout(() => (isCd = false), threshold);
       } else {
         isCd = false;
       }
-    }, trashold);
+    }, threshold);
   };
 };
