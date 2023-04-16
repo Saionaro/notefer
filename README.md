@@ -20,7 +20,7 @@ Then you can import required things and send notifications
 
 ```js
 import { pushNotification } from "notefer";
-import "notefer/lib/index.css";
+import "notefer/lib/style.css";
 
 pushNotification({
   title: "Direct Message",
